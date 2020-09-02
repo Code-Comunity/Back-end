@@ -26,9 +26,9 @@ const jwt = require('jsonwebtoken')
             const token = jwt.sign({
                 id: data.ID,
                 nome: data.nome,
-                email: data.email
+                email: data.email,
             },  DataBase.hash,
-               {expiresIn: "1h"})
+            {   expiresIn: "1h"   })
 
             res.send({mensagem: "autendicado", token: token})  
             
