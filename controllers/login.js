@@ -30,7 +30,7 @@ const jwt = require('jsonwebtoken')
             },  DataBase.hash,
             {   expiresIn: "1h"   })
 
-            res.send({mensagem: "autendicado", token: token})  
+            res.send({mensagem: "autenticado", token: token})  
             
         }} 
     })
