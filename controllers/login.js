@@ -30,7 +30,7 @@ const jwt = require('jsonwebtoken')
             },  DataBase.hash,
             {   expiresIn: "1h"   })
 
-            res.send({mensagem: "autendicado", token: token}) // OBS. redirecionar o usuário para página em questão
+            res.send({mensagem: "autenticado", token: token}) // Redirecionar usuario para página. // (incompleto*)  
             
         }} 
     })
