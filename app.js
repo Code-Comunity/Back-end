@@ -5,6 +5,7 @@ const path = require("path")
 const cadastro = require('./controllers/cadastro')
 const listar = require('./controllers/listar')
 const login = require('./controllers/login')
+const produtos = require('./users/produtos')
 const app = express()
 
 
@@ -34,7 +35,8 @@ const app = express()
         app.use('/cadastro',cadastro);
         app.use('/listar',listar);
         app.use('/login',login);
-    
+        app.use('/produtos',produtos)
+
     //
 
     // outros.

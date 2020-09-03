@@ -54,7 +54,7 @@ router.post('/', async function(req,res){
         
         if (idCliente < 1) {
         
-            res.send({mensagem: "erro ao cadastras usuario"})
+            res.send({mensagem: "erro ao cadastrar usuario"})
         
         }else{
         

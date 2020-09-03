@@ -4,7 +4,7 @@ const router = express.Router();
 
     router.post('/',async function(req,res){
         
-        const clientes = await DataBase.knex.select('clientes.ID','clientes.nome','clientes.email','endereço.cep','endereço.cidade','endereço.estado').table('clientes').innerJoin('endereço','endereço.idCliente','clientes.ID')
+        const clientes = await DataBase.knex.select('clientes.id_cliente','clientes.nome','clientes.email','endereço.cep','endereço.cidade','endereço.estado').table('clientes').innerJoin('endereço','endereço.id_cliente','clientes.id_cliente')
         res.send(clientes)
         console.log(clientes);
     })

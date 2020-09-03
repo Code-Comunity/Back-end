@@ -24,13 +24,13 @@ const jwt = require('jsonwebtoken')
         } else {
                         
             const token = jwt.sign({
-                id: data.ID,
+                id: data.id_cliente,
                 nome: data.nome,
                 email: data.email,
             },  DataBase.hash,
             {   expiresIn: "1h"   })
 
-            res.send({mensagem: "autendicado", token: token})  
+            res.send({mensagem: "autendicado", token: token}) // OBS. redirecionar o usuário para página em questão
             
         }} 
     })
