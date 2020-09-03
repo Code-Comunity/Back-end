@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router();
 const DataBase = require("../configs/DataBases")
 
+
+// Rota para criar um produto novo. // (incompleto*)
+
     router.post('/',async (req,res)=>{
 
 
@@ -32,7 +35,7 @@ const DataBase = require("../configs/DataBases")
 
 
     })
-
+//
 
 
 

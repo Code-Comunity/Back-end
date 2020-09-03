@@ -3,43 +3,46 @@ const router = express.Router();
 const DataBase = require('../configs/DataBases')
 
 
-router.get('/', async(req,res)=>{
+// Rota para listar produtos da home. // (incompleto*)
 
-    const produtos = await DataBase.knex.select('produtos.id_produto','produtos.produto','produtos.preco','imagens.imagem').table('produtos').innerJoin('imagens','imagens.id_produto','produtos.id_produto')
-    
-    if (produtos.length < 1) {
 
-       res.send({mensagem: "erro ao listar produtos"})
+    router.get('/', async(req,res)=>{
 
-    } else {
+        const produtos = await DataBase.knex.select('produtos.id_produto','produtos.produto','produtos.preco','imagens.imagem').table('produtos').innerJoin('imagens','imagens.id_produto','produtos.id_produto')
+        
+        if (produtos.length < 1) {
 
-        const itens = {
+        res.send({mensagem: "erro ao listar produtos"})
 
-            card: produtos.map(iten =>{
+        } else {
 
-                return{
+            const itens = {
 
-                    id_produto: produtos.id_produto,
+                card: produtos.map(iten =>{
 
-                    nome: produtos.nome,
+                    return{
 
-                    imagem: produtos.imagem,
+                        id_produto: produtos.id_produto,
 
-                    produto: produtos.produto,
+                        nome: produtos.nome,
 
-                    preco: produtos.preco,
-                    
-                    request:{
-                        tipo:'GET',
-                        url: 'http://localhost:8080/produto' + produtos.id_produto
+                        imagem: produtos.imagem,
+
+                        produto: produtos.produto,
+
+                        preco: produtos.preco,
+                        
+                        request:{
+                            tipo:'GET',
+                            url: 'http://localhost:8080/produto' + produtos.id_produto
+                        }
                     }
-                }
-            })
+                })
+            }
+            res.send(produtos)
         }
-        res.send(produtos)
-    }
-})
-
+    })
+//
 
 
 
