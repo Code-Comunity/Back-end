@@ -1,11 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const handlebars  = require('express-handlebars');
-const path = require("path")
 const cadastro = require('./controllers/cadastro')
-const listar = require('./controllers/listar')
+const listar = require('./routers/adm/listar_clientes')
 const login = require('./controllers/login')
-const produtos = require('./users/produtos')
+const produtos = require('./routers/users/listar_produtos')
+const addProduto = require('./routers/adm/cadastrar_produto')
+const listProduto = require('./routers/adm/listar_produto')
 const app = express()
 
 
@@ -21,6 +22,7 @@ const app = express()
 
     // path.
     
+    
 
     //
 
@@ -32,11 +34,20 @@ const app = express()
 
     // Rotas de testes. 
 
-        app.use('/cadastro',cadastro);
+               
+        // Rotas publicas
         app.use('/listar',listar);
         app.use('/login',login);
-        app.use('/produtos',produtos)
+        app.use('/cadastro',cadastro);
+        //
 
+        // Rodatas de ADM
+        app.use('/produtos',produtos)
+        app.use('/addProduto',addProduto)
+        app.use('/listProduto',listProduto)
+  //
+    
+    
     //
 
     // outros.

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const DataBase = require('../configs/DataBases')
+const DataBase = require('../../configs/DataBases')
 
 
 // Rota para listar produtos da home. // (incompleto*)
