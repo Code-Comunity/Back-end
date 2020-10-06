@@ -6,7 +6,7 @@ const DataBases = require('../../configs/DataBases');
   router.get('/produto/:id_produto', async(req, res) => {
     const {id_produto} = req.params;
     console.log(id_produto)
-    const produto = await DataBases.knex.select('*').where('id_produto',id_produto).table('produtos').first()  
+    const produto = await DataBases.knex.select('*').where('id_produto',id_produto).table('produtos').first()
 
     if (produto.length < 1) {
 

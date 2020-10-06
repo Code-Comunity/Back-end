@@ -19,8 +19,8 @@ router.post("/", (req,res) => {
   .then((transaction) => {
     return res.json({transaction: transaction})
   })
-  .catch((error)=>{
-    console.error(error.response.errors);
+  .catch((err)=>{
+    return res.json({message: err.response.error});
   })
 
 })
