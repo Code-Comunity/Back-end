@@ -3,7 +3,6 @@ const router = express.Router();
 const pagarme = require('pagarme');
 
 router.post('/', (req,res) => {
-
   //Objetos vindo do FRONT END, com as variaveis que serão usadas na transação
   const { amount, payment_method, postback_url, costumer } = req.body;
 
@@ -12,23 +11,15 @@ router.post('/', (req,res) => {
     amount: amount,
     payment_method: payment_method,
     postback_url: postback_url,
-    customer: {
-      type: 'individual',
-      country: 'br',
-      name: 'Aardvark Silva',
-      documents: [
-        {
-          type: 'cpf',
-          number: '00000000000',
-        },
-      ],
-    },
+    customer: costumer
   }))
   .then((transaction) => {
     return res.json({transaction: transaction});
   })
   .catch(err=>{
+  console.log(err.response)
    return res.json({message: err.response.error});
   })
 })
 
+module.exports = router;

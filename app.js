@@ -21,6 +21,7 @@
     const cadastrarAdmin = require('./routers/adm/cadastrar_adm')
     const checkout = require('./routers/adm/checkout')
     const transaction = require('./routers/adm/transaction')
+    const boleto = require('./routers/adm/boleto_transaction')
 
     const { Total, Sacar } = require('./controllers/pagarme');
 //Sistema
@@ -74,6 +75,7 @@
             app.use('/sacardinheiro', Sacar)
             app.use('/checkout', checkout) //ROTA DE CHECKOUT (PEGAR O CARD HASH)
             app.use('/transaction', transaction) //ROTA DE PAGAMENTO
+            app.use('/transactionboleto', boleto)
 
         //
     

@@ -8,7 +8,7 @@ const DataBases = require('../../configs/DataBases');
     console.log(id_produto)
     const produto = await DataBases.knex.select('*').where('id_produto',id_produto).table('produtos').first()
 
-    if (produto.length < 1) {
+    if (produto.length <= 1) {
 
       res.send({mensagem: "Produto não encontrado"})
 

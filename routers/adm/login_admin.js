@@ -9,7 +9,7 @@ router.post('/', async (req,res)=>{
   const data = await DataBase.knex.select().table('admin').where('email',req.body.email).first()
 
   if(data === undefined){
-    res.status(401).send({mensagem:'usuario não cadastrado'})
+    res.status(401).json({mensagem:'usuario não cadastrado'}).send();
     console.log('erro!')
   }else{
 
