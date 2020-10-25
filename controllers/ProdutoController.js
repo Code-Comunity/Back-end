@@ -1,6 +1,5 @@
 const {request,response} = require('express')
 const DataBase = require("../configs/DataBases")
-const multer = require('multer')
 const yup = require('yup')
 
 
