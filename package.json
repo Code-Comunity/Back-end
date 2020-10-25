@@ -16,7 +16,8 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "node-fetch": "^2.6.1",
-    "pagarme": "^4.13.0"
+    "pagarme": "^4.13.0",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
