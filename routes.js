@@ -7,9 +7,9 @@ const multerConfig = require('./configs/uploads')
 // Rotas 
 
     const Produto = require('./controllers/ProdutoController');
-    const Client = require('./controllers/ClientController')
+    const Cliente = require('./controllers/ClienteController')
     
-    const login = require('./controllers/loginController')
+    const Login = require('./controllers/loginController')
     const cadastro = require('./controllers/cadastroController')
 
 //
@@ -21,17 +21,17 @@ const multerConfig = require('./configs/uploads')
 
     // Rotas
 
-        router.post('/login',login)
+        router.post('/login',Login.LoginAdmin)
         router.post('cadastro',cadastro)
         
-        // router.post('/cliente',)
-        // router.get('/cliente')
-        // router.get('/cliente')
-        // router.patch('/cliente')
+        router.post('/cliente',Cliente.Create)
+        router.get('/cliente',Cliente.ReadAll)
+        router.get('/cliente/:id',Cliente.ReadForId)
+        router.patch('/cliente/:id',Cliente.Update)
         
         router.post('/produto',upload.single('images'),Produto.Create)
-        router.get('/produto',Produto.Select)
-        router.get('/produto/:id',Produto.Select_id)
+        router.get('/produto',Produto.ReadAll)
+        router.get('/produto/:id',Produto.ReadForId)
         router.patch('/produto/:id',upload.single('images'),Produto.Update)
         router.delete('/produto/:id',Produto.Delete)
 

@@ -18,12 +18,14 @@ module.exports ={
         
         const ResquestImages = Request.file
        
+        
+
         const data = {
             produto,
             descrisao,
             preco,
             estoque,
-            image: ResquestImages
+            img: ResquestImages.filename
         }
         
         const schema = yup.object().shape({
@@ -32,7 +34,7 @@ module.exports ={
             descrisao: yup.string().required(),
             preco: yup.number().required(),
             estoque: yup.number().required(),
-            image: yup.string().required
+            img: yup.string().required(),
 
         })
 
@@ -46,7 +48,7 @@ module.exports ={
            
     },
 
-    async Select(Request = request,Response = response){
+    async ReadAll(Request = request,Response = response){
           
         const produtos = await DataBase.knex.select().table('produtos')
         
@@ -54,7 +56,7 @@ module.exports ={
       
     },
 
-    async Select_id(Request = request,Response = response){
+    async ReadForId(Request = request,Response = response){
     
         const {id} = Request.params
     

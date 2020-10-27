@@ -6,57 +6,99 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 
+
 module.exports ={
+
     async Create(Request = request,Response = response){
 
-        const { name, email, password, cep,  } = Request.body
+        const dataforms = {nome, email, senha, cep} = Request.body
+        
+        var data = {nome: nome, email: email, senha:senha}
 
-        var data = { name,  email, password, cep }
-
+        const emailBD = await DataBase.knex.select('email').table('clientes').where({email: data.email})
+          
         const schema = yup.object().shape({
 
-            name: yup.string().required(),
+            nome: yup.string().required(),
             email: yup.string().required().email(),
-            password: yup.string().required().length(7).trim(),
+            senha: yup.string().required().max(9).min(5).trim(),
             cep: yup.string().required().trim(),
             
         })
 
-        schema.validate(data,{
-            abortEarly:false
-        })
-
         try {
+
+            await schema.validate(dataforms,{
+                abortEarly:false
+            })
             
-            data.password = bcrypt.hashSync(password,10)
- 
-            const id = await DataBase.knex.insert(data).into("clientes")
+            const RequestCep = await axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((e)=>{return e.data;})
+
+            data.senha = bcrypt.hashSync(senha,10)
+
+            const id = await DataBase.knex.insert(data).into('clientes')
+           
+            const endereco = [{cep: RequestCep.cep, cidade: RequestCep.localidade, estado: RequestCep.uf, id_Cliente: id}]
             
-            const cep = await axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((e)=>{return e.data;})
+            await DataBase.knex.insert(endereco).into('endereço')
 
-            const endereco = [{cep: cep.cep, cidade: cep.localidade, estado: cep.uf, id_Cliente: id}]
+            
+            const token = jwt.sign({    
 
-            const token = jwt.sign({
-
-                id: idCliente,
-                nome: cliente.nome,
-                email: cliente.email,
+                id: id,
+                nome: dataforms.nome,
+                email: dataforms.email,
             },  DataBase.hash,{expiresIn: "1h"})            
 
+            Response.status(200).json(token)
+ 
         } catch (e) {
-            Error()
+            if (e instanceof yup.ValidationError ) {
+                const erro = [] 
+                e.inner.forEach(err => {
+                    erro.push({Campo: err.path, Erro: err.errors})
+                })
+                Response.json(erro)                    
+            }
+            
         }
 
 
     },
-    async Select(Request = request,Response = response){
-
+    async ReadAll(Request = request,Response = response){
+        
+        const data = await DataBase.knex('clientes').select('*')
+        
+        Response.status(200).json(data)
     },
-    async Select_id(Request = request,Response = response){
+    async ReadForId(Request = request,Response = response){
+
+        const {id} = Request.params
+
+        const data = await DataBase.knex.select("*").where({id_Cliente: id}).first()
+
+        Response.status(200).json(data)
 
     },
     async Update(Request = request,Response = response){
         
-    },
+        const {id} = Request.params
+
+        var {password} = Request.body
+
+        const schema = yup.object().shape({
+            password: yup.string().required().length(7).trim()
+        })
+
+        schema.validate(password,{
+            abortEarly:false
+        })
+
+        password = await bcrypt.hash(password,10)
+
+        await DataBase.knex('clientes').where({id_Cliente: id}).update(password)
+        
+    }        
+      
 
 }
