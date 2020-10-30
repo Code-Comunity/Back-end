@@ -4,7 +4,7 @@ const yup = require('yup')
 const axios = require('axios')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const {Render,ReadAll} = require('../views/Cliente-Views')
+const {Render,RenderAll} = require('../views/Cliente-Views')
 
 
 module.exports ={
@@ -66,7 +66,7 @@ module.exports ={
         
         const data = await DataBase.knex('clientes').select()
         
-        Response.status(200).json(ReadAll(data))
+        Response.status(200).json(RenderAll(data))
     },
     async ReadForId(Request = request,Response = response){
 

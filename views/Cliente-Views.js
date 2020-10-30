@@ -14,7 +14,7 @@ module.exports = {
         return cliente 
     
     },
-    ReadAll(data = []){  
+    RenderAll(data = []){  
 
         const clientes = []
         data.forEach(data =>{ 

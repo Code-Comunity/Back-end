@@ -1,7 +1,8 @@
 const {request,response} = require('express')
 const DataBase = require("../configs/DataBases")
 const yup = require('yup')
-const {Render,ReadAll} = require('../views/Produto-Views')
+const {Render,RenderAll} = require('../views/Produto-Views')
+
 
 
 
@@ -50,7 +51,7 @@ module.exports ={
           
         const produtos = await DataBase.knex.select().table('produtos')
         
-        Response.status(200).json(ReadAll(produtos))
+        Response.status(200).json(RenderAll(produtos))
       
     },
 
