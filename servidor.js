@@ -3,7 +3,7 @@ const routers = require('./routes')
 const cors = require('cors');
 const path = require('path')
 const app = express()
-
+const errors = require('./errors/handle')
     // Configurando express
      
         app.use(express.json())
@@ -22,6 +22,10 @@ const app = express()
 
     //
 
+
+    app.use(errors.Erro1)
+    app.use('teste',errors.Error2)
+    
 
 app.listen(8080, () => console.log(``))
 

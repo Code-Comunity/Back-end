@@ -5,11 +5,13 @@ const router = Router()
 const multerConfig = require('./configs/uploads')
 
 // Rotas 
+    const Login = require('./controllers/loginController')
 
     const Produto = require('./controllers/ProdutoController');
     const Cliente = require('./controllers/ClienteController')
     
-    const Login = require('./controllers/loginController')
+    const pagarme = require('./controllers/PagarmeController')
+    
     
 //
 
@@ -34,9 +36,26 @@ const multerConfig = require('./configs/uploads')
         router.patch('/produto/:id',upload.single('images'),Produto.Update)
         router.delete('/produto/:id',Produto.Delete)
 
+        router.post('/pagarme-cartao',pagarme.PagamentoCartao)
+        router.post('/pagarme-sacar',pagarme.Sacar) ///----rota não testada----///
+        router.post('/pagarme-total',pagarme.Total) ///----rota não testada----///
+
+        // proximas rotas //
+
+        // router.post('/frete',frete)
+
+        // router.post('/pedido',pedido) 
+        // router.get('/pedido',pedido) 
+
 
 
     //
+
+  
+    
+
+
+
 
 module.exports = router
 

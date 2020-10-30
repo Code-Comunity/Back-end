@@ -9,8 +9,8 @@ const {Render,ReadAll} = require('../views/Cliente-Views')
 
 module.exports ={
 
-    async Create(Request = request,Response = response){
-
+    async Create(Request = request,Response = response, next) {
+        
         const dataforms = {nome, email, senha, cep} = Request.body
         
         var data = {nome, email, senha}
