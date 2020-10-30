@@ -7,14 +7,14 @@ module.exports = {
 
     async LoginClient(Request = request,Response = response) {
 
-        const data = await DataBase.knex.select().table('clientes').where('email',req.body.email).first()
+        const data = await DataBase.knex.select().table('clientes').where('email',Request.body.email).first()
         const endereco = await DataBase.knex.select().table('endereço').where('id_cliente',data.id_cliente).first()
         
         const {nome,email} = data;
         
         if (!data) {
 
-            res.send({mensagem: "Email não cadastrado"})
+            Response.send({mensagem: "Email não cadastrado"})
         
         } else {
 
@@ -22,7 +22,7 @@ module.exports = {
 
             if (!batem) {
                 
-                res.send({mensagem: "Senha Inválida"})
+                Response.send({mensagem: "Senha Inválida"})
                 
             } else {
                             
@@ -48,7 +48,7 @@ module.exports = {
 
             if(data === undefined){
         
-            Request.status(401).send({mensagem:'usuario não cadastrado'})
+                Response.status(401).send({mensagem:'usuario não cadastrado'})
             
             }else{
 
@@ -56,15 +56,15 @@ module.exports = {
                 
                 if (!data) {
 
-                    Request.send({mensagem: "Email não cadastrado"})
+                    Response.send({mensagem: "Email não cadastrado"})
                 
                 } else {
 
-                    const batem =  await bcrypt.compare(req.body.senha,data.senha)
+                    const batem =  await bcrypt.compare(Request.body.senha,data.senha)
 
                 if (!batem) {
                     
-                    Request.status(401).send({mensagem: "Senha Inválida"})
+                    Response.status(401).send({mensagem: "Senha Inválida"})
                     
                 } else {
                                 
@@ -76,7 +76,7 @@ module.exports = {
                     },  DataBase.hash,
                     {   expiresIn: "1h"   })
 
-                    Request.json({
+                    Response.json({
                         usuario:{nome,email},
                         mensagem:"autenticado",
                         token: token

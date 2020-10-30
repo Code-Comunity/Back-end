@@ -1,6 +1,7 @@
 const {request,response} = require('express')
 const DataBase = require("../configs/DataBases")
 const yup = require('yup')
+const {Render,ReadAll} = require('../views/Produto-Views')
 
 
 
@@ -8,7 +9,6 @@ module.exports ={
 
     async Create(Request = request,Response = response){
                 
-        
         const {
             produto,
             descrisao,
@@ -17,9 +17,7 @@ module.exports ={
         } = Request.body  
         
         const ResquestImages = Request.file
-       
-        
-
+               
         const data = {
             produto,
             descrisao,
@@ -44,7 +42,7 @@ module.exports ={
 
         await DataBase.knex.insert(data).into('produtos')
            
-        return Response.status(201).json(data)
+        return Response.status(201).json({message: 'Success'})
            
     },
 
@@ -52,7 +50,7 @@ module.exports ={
           
         const produtos = await DataBase.knex.select().table('produtos')
         
-        Response.status(200).json(produtos)
+        Response.status(200).json(ReadAll(produtos))
       
     },
 
@@ -62,13 +60,14 @@ module.exports ={
     
         const produto = await DataBase.knex.select().table('produtos').where('id_produto',id)
         
-        return Response.status(200).json(produto)
+        return Response.status(200).json(Render(produto))
 
     },
 
     async Update(Request = request,Response = response){
 
         const {
+            id,
             produto,
             descrisao,
             preco,
@@ -82,7 +81,7 @@ module.exports ={
             descrisao,
             preco,
             estoque,
-            image: ResquestImages
+            img: ResquestImages.filename
         }
         
         const schema = yup.object().shape({
@@ -91,17 +90,23 @@ module.exports ={
             descrisao: yup.string().required(),
             preco: yup.number().required(),
             estoque: yup.number().required(),
-            image: yup.string().required
+            img: yup.string().required()
 
         })
 
-        await schema.validate(data,{
+        try {
+            
+        schema.validate(data,{
             abortEarly:false
         })
+                
+        await DataBase.knex('produtos').where('id_produto', id).update(data)
 
-        const {id} = Response.params
+        Response.status(200).json({message: 'success'})
 
-        await DataBase.knex('produtos').where({id_produto: id}).update(data)
+        } catch (error) {
+           console.log(error);     
+        }
 
     },
 
@@ -111,7 +116,7 @@ module.exports ={
 
         await DataBase.knex.table('produtos').where({id_produto: id}).delete()
 
-        return Response.status(200).json()
+        return Response.status(200).json({message: 'Success'})
     }
 
 }

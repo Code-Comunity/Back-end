@@ -14,7 +14,7 @@ const app = express()
     
     // tratando pasta de images    
     
-        app.use('/uploads', express.static(path.join(__dirname, '..','uploads')))
+        app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
     
     // rotas
 

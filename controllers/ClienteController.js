@@ -4,7 +4,7 @@ const yup = require('yup')
 const axios = require('axios')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
+const {Render,ReadAll} = require('../views/Cliente-Views')
 
 
 module.exports ={
@@ -13,9 +13,9 @@ module.exports ={
 
         const dataforms = {nome, email, senha, cep} = Request.body
         
-        var data = {nome: nome, email: email, senha:senha}
+        var data = {nome, email, senha}
 
-        const emailBD = await DataBase.knex.select('email').table('clientes').where({email: data.email})
+        // const emailBD = await DataBase.knex.select('email').table('clientes').where({email: data.email})
           
         const schema = yup.object().shape({
 
@@ -50,7 +50,7 @@ module.exports ={
                 email: dataforms.email,
             },  DataBase.hash,{expiresIn: "1h"})            
 
-            Response.status(200).json(token)
+            Response.status(200).json({mensagem: "Usuario cadastrado com sucesso", token: token  })
  
         } catch (e) {
             if (e instanceof yup.ValidationError ) {
@@ -60,43 +60,40 @@ module.exports ={
                 })
                 Response.json(erro)                    
             }
-            
         }
-
-
     },
     async ReadAll(Request = request,Response = response){
         
-        const data = await DataBase.knex('clientes').select('*')
+        const data = await DataBase.knex('clientes').select()
         
-        Response.status(200).json(data)
+        Response.status(200).json(ReadAll(data))
     },
     async ReadForId(Request = request,Response = response){
 
         const {id} = Request.params
 
-        const data = await DataBase.knex.select("*").where({id_Cliente: id}).first()
+        const data = await DataBase.knex.select().table('clientes').where({id_Cliente: id})
 
-        Response.status(200).json(data)
+        Response.status(200).json(Render(data))
 
     },
     async Update(Request = request,Response = response){
         
         const {id} = Request.params
 
-        var {password} = Request.body
+        var {senha} = Request.body
 
         const schema = yup.object().shape({
-            password: yup.string().required().length(7).trim()
+            senha: yup.string().required().length(7).trim()
         })
 
-        schema.validate(password,{
+        schema.validate(senha,{
             abortEarly:false
         })
 
-        password = await bcrypt.hash(password,10)
+        senha = await bcrypt.hash(senha,10)
 
-        await DataBase.knex('clientes').where({id_Cliente: id}).update(password)
+        await DataBase.knex('clientes').where({id_Cliente: id}).update(senha)
         
     }        
       

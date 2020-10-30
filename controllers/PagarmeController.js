@@ -20,7 +20,7 @@ module.exports = {
       });
   },
 
-  Sacar(Request = request,Response = response){
+  async Sacar(Request = request,Response = response){
       pagarme.client
         .connect({ api_key: "ak_test_moyHJWO5yY9VUWgPvzHg5RAHR5uNn0" })
         .then((client) =>
@@ -35,7 +35,7 @@ module.exports = {
         });
   },
 
-  PagamentoCartao(Request, Response) {
+  async PagamentoCartao(Request, Response) {
     const { valorTotal, nomeCartao, dataExpiracao, numeroCartao, cvv, costumer, items } = Request.body;
 
     pagarme.client.connect({ api_key: 'ak_test_moyHJWO5yY9VUWgPvzHg5RAHR5uNn0' })

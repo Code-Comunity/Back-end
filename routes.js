@@ -10,8 +10,7 @@ const multerConfig = require('./configs/uploads')
     const Cliente = require('./controllers/ClienteController')
     
     const Login = require('./controllers/loginController')
-    const cadastro = require('./controllers/cadastroController')
-
+    
 //
 
 
@@ -21,8 +20,8 @@ const multerConfig = require('./configs/uploads')
 
     // Rotas
 
-        router.post('/login',Login.LoginAdmin)
-        router.post('cadastro',cadastro)
+        router.post('/login-Admin',Login.LoginAdmin)
+        router.post('/login',Login.LoginClient)
         
         router.post('/cliente',Cliente.Create)
         router.get('/cliente',Cliente.ReadAll)
@@ -34,6 +33,8 @@ const multerConfig = require('./configs/uploads')
         router.get('/produto/:id',Produto.ReadForId)
         router.patch('/produto/:id',upload.single('images'),Produto.Update)
         router.delete('/produto/:id',Produto.Delete)
+
+
 
     //
 
