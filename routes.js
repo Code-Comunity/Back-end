@@ -12,9 +12,9 @@ const multerConfig = require('./configs/uploads')
     
     const pagarme = require('./controllers/PagarmeController')
     
+    const Frete = require('./controllers/FreteController')
     
 //
-
 
     // configuração do multer
         const upload = multer(multerConfig)
@@ -28,12 +28,12 @@ const multerConfig = require('./configs/uploads')
         router.post('/cliente',Cliente.Create)
         router.get('/cliente',Cliente.ReadAll)
         router.get('/cliente/:id',Cliente.ReadForId)
-        router.patch('/cliente/:id',Cliente.Update)
+        router.patch('/cliente',Cliente.Update)
         
         router.post('/produto',upload.single('images'),Produto.Create)
         router.get('/produto',Produto.ReadAll)
         router.get('/produto/:id',Produto.ReadForId)
-        router.patch('/produto/:id',upload.single('images'),Produto.Update)
+        router.put('/produto',upload.single('images'),Produto.Update)
         router.delete('/produto/:id',Produto.Delete)
 
         router.post('/pagarme-cartao',pagarme.PagamentoCartao)
@@ -42,7 +42,7 @@ const multerConfig = require('./configs/uploads')
 
         // proximas rotas //
 
-        // router.post('/frete',frete)
+        router.post('/frete',Frete.CalcularValorPrazo)
 
         // router.post('/pedido',pedido) 
         // router.get('/pedido',pedido) 
