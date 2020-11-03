@@ -19,7 +19,7 @@ module.exports = {
     },    
     RenderAll(obj) {
         const produtos = []
-        obj.forEach( produto => {
+        obj.map( produto => {
 
             produtos.push({
                 id: produto.id_produto,

@@ -25,7 +25,7 @@ const multerConfig = require('./configs/uploads')
         router.post('/login-Admin',Login.LoginAdmin)
         router.post('/login',Login.LoginClient)
         
-        router.post('/cliente',Cliente.Create)
+        router.post('/cadastrarCliente',Cliente.Create)
         router.get('/cliente',Cliente.ReadAll)
         router.get('/cliente/:id',Cliente.ReadForId)
         router.patch('/cliente',Cliente.Update)
@@ -37,8 +37,9 @@ const multerConfig = require('./configs/uploads')
         router.delete('/produto/:id',Produto.Delete)
 
         router.post('/pagarme-cartao',pagarme.PagamentoCartao)
+        router.post('/pagarme-boleto', pagarme.PagamentoBoleto)
         router.post('/pagarme-sacar',pagarme.Sacar) ///----rota não testada----///
-        router.post('/pagarme-total',pagarme.Total) ///----rota não testada----///
+        router.get('/pagarme-total',pagarme.Total) ///----rota não testada----///
 
         // proximas rotas //
 

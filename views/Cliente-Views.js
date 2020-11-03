@@ -17,7 +17,7 @@ module.exports = {
     RenderAll(data = []){  
 
         const clientes = []
-        data.forEach(data =>{ 
+        data.map(data =>{ 
             clientes.push({
                 id: data.id_cliente,
                 cliente: data.nome,
