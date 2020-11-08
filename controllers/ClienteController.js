@@ -37,11 +37,12 @@ module.exports ={
             data.senha = bcrypt.hashSync(senha,10)
 
             const id = await DataBase.knex.insert(data).into('clientes')
-           
+                      
+            await DataBase.knex.insert({id_Cliente:id}).into('carrinhos')
+
             const endereco = [{cep: RequestCep.cep, cidade: RequestCep.localidade, estado: RequestCep.uf, id_Cliente: id}]
             
             await DataBase.knex.insert(endereco).into('endereço')
-
             
             const token = jwt.sign({    
 
@@ -50,7 +51,7 @@ module.exports ={
                 email: dataforms.email,
             },  DataBase.hash,{expiresIn: "1h"})            
 
-            Response.status(200).json({mensagem: "Usuario cadastrado com sucesso", token: token  })
+            Response.status(200).json({mensagem: "Usuário cadastrado com sucesso", token: token  })
  
         } catch (e) {
             if (e instanceof yup.ValidationError ) {
@@ -60,6 +61,7 @@ module.exports ={
                 })
                 Response.json(erro)                    
             }
+            Response.json(e)
         }
     },
     async ReadAll(Request = request,Response = response){

@@ -4,15 +4,15 @@ module.exports = {
 
     Error1(req,res,next){
         const err = new Error("Pagina não encontrado")
-        err.status = 404
+            err.status = 404
         next(err)
     },
     Error2(err, req, res, next){
         
         if (err instanceof yup.ValidationError ) {
-            
-            console.log(err);
-      
+            const err = new Error("Bad Request")
+            console.log(err)    ;
+            res.json(err)    
         } else {
                 
         res.status(err.status || 500)

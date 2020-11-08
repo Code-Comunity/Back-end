@@ -23,8 +23,8 @@ const errors = require('./errors/handle')
     //
 
 
-    app.use(errors.Error1)
-    app.use(errors.Error2)
+    //app.use(errors.Error1)
+    //app.use(errors.Error2)
     
 
 app.listen(8080, () => console.log(``))
