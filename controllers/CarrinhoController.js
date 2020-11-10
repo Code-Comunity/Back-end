@@ -1,6 +1,6 @@
 const {request,response} = require('express')
 const {knex} = require('../configs/DataBases')
-
+const {RenderAll} = require('../views/Carrinho-views')
 
 
     
@@ -39,19 +39,24 @@ const {knex} = require('../configs/DataBases')
     async function ReadAll(Request = request,Response = response){
         
         const {id_carrinho} = Request.body
-        const data = await knex('carrinho_produto')
+        try {
+            const data = await knex('carrinho_produto')
         .select(
             'produtos.id_produto as id',
             'produtos.produto as produto',
             'produtos.descrisao as descrisao',
             'produtos.img as img',
-            'produtos.preco as preco_unitario',
+            'produtos.preco as preco',
             'carrinho_produto.quantidade'
         )
         .innerJoin('produtos','carrinho_produto.id_produto','produtos.id_produto')
         .where({id_carrinho:id_carrinho})
     
-        return Response.json(data)
+        return Response.json(RenderAll(data))
+        
+        } catch (error) {
+           console.log(error); 
+        }
     }
     async function ReadForId(Request){
 

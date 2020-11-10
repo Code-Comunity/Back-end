@@ -1,7 +1,8 @@
 const {request,response} = require('express')
 const DataBase = require("../configs/DataBases")
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { knex } = require('../configs/DataBases');
 
 module.exports = {
 
@@ -25,16 +26,20 @@ module.exports = {
                 Response.send({mensagem: "Senha Inválida"})
                 
             } else {
-                            
+                
+                const carrinho =  await DataBase.knex('carrinhos').select('id').where('id_cliente',data.id_cliente).first()
+                
+                console.log(carrinho);
+
                 const token = jwt.sign({
                     id: data.id_cliente,
                     nome: data.nome,
                     email: data.email,
-                },  DataBase.hash,
+                    },  DataBase.hash,
                 {   expiresIn: "1h"   })
 
                 Response.status(200).json({
-                    usuario:{nome,email,endereco},
+                    usuario:{nome,email,carrinho: carrinho.id,endereco},
                     mensagem:"autenticado",
                     token: token
                 })  
@@ -67,13 +72,14 @@ module.exports = {
                     Response.status(401).send({mensagem: "Senha Inválida"})
                     
                 } else {
-                                
+
+                    
                     const token = jwt.sign({
                         id: data.id,
                         nome: data.nome,
                         email: data.email,
-                        img: data.img
-                    },  DataBase.hash,
+                        img: data.img,
+                        },  DataBase.hash,
                     {   expiresIn: "1h"   })
 
                     Response.json({
