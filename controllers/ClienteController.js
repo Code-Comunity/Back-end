@@ -67,7 +67,7 @@ module.exports ={
     async ReadAll(Request = request,Response = response){
         
         const data = await DataBase.knex('clientes').select()
-        
+        console.log(data)
         Response.status(200).json(RenderAll(data))
     },
     async ReadForId(Request = request,Response = response){

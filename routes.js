@@ -5,7 +5,7 @@ const router = Router()
 const multerConfig = require('./configs/uploads')
 
 // Rotas 
-    const Login = require('./controllers/loginController')
+    const Login = require('./controllers/LoginController')
 
     const Produto = require('./controllers/ProdutoController');
     const Cliente = require('./controllers/ClienteController')
@@ -41,7 +41,11 @@ const multerConfig = require('./configs/uploads')
         router.post('/pagarme-boleto', pagarme.PagamentoBoleto)
         router.post('/pagarme-sacar',pagarme.Sacar) ///----rota não testada----///
         router.get('/pagarme-total',pagarme.Total) ///----rota não testada----///
-
+        router.get('/pagarme-todastransacoes', pagarme.TodasTransações)
+        router.post('/pagarme-estorno/:id', pagarme.EstornoPagamento)
+        router.get('/pagarme-recebiveis', pagarme.Recebiveis)
+        router.post('/pagarme-criarrecebedor', pagarme.CriandoRecebivel)
+        router.post('/pagarme-criarcontabancaria', pagarme.CriandoContaBancaria)
         // proximas rotas //
 
         router.post('/frete',Frete.CalcularValorPrazo)
