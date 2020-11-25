@@ -10,10 +10,12 @@ const {Render,RenderAll} = require('../views/Cliente-Views')
 module.exports ={
 
     async Create(Request = request,Response = response, next) {
-        
-        const dataforms = {nome, email, senha, cep} = Request.body
-        
-        var data = {nome, email, senha}
+
+        const ResquestImages = Request.file
+       
+        const data = {nome, email, senha, cep} = Request.body
+
+        const dataforms = {nome, email, senha, img: ResquestImages.filename }
 
         // const emailBD = await DataBase.knex.select('email').table('clientes').where({email: data.email})
           
@@ -28,15 +30,16 @@ module.exports ={
 
         try {
 
-            await schema.validate(dataforms,{
+            await schema.validate(data,{
                 abortEarly:false
             })
             
             const RequestCep = await axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((e)=>{return e.data;})
 
-            data.senha = bcrypt.hashSync(senha,10)
+            console.log(dataforms);
+            dataforms.senha = bcrypt.hashSync(senha,10)
 
-            const id = await DataBase.knex.insert(data).into('clientes')
+            const id = await DataBase.knex.insert(dataforms).into('clientes')
                       
             await DataBase.knex.insert({id_Cliente:id}).into('carrinhos')
 
@@ -54,13 +57,7 @@ module.exports ={
             Response.status(200).json({mensagem: "Usuário cadastrado com sucesso", token: token  })
  
         } catch (e) {
-            if (e instanceof yup.ValidationError ) {
-                const erro = [] 
-                e.inner.forEach(err => {
-                    erro.push({Campo: err.path, Erro: err.errors})
-                })
-                Response.json(erro)                    
-            }
+           
             Response.json(e)
         }
     },
