@@ -17,7 +17,7 @@ module.exports ={
 
         const dataforms = {nome, email, senha, img: ResquestImages.filename }
 
-        // const emailBD = await DataBase.knex.select('email').table('clientes').where({email: data.email})
+            // const emailBD = await DataBase.knex.select('email').table('clientes').where({email: data.email})
           
         const schema = yup.object().shape({
 
