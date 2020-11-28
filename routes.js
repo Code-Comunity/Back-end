@@ -7,7 +7,8 @@ const multerConfig = require('./configs/uploads')
 // Rotas 
     const Login = require('./controllers/LoginController')
 
-    const Produto = require('./controllers/ProdutoController');
+    const Produto = require('./controllers/ProdutoController')
+
     const Cliente = require('./controllers/ClienteController')
     
     const pagarme = require('./controllers/PagarmeController')
@@ -44,9 +45,10 @@ const multerConfig = require('./configs/uploads')
         router.get('/pagarme-total',pagarme.Total) ///----rota não testada----///
         router.get('/pagarme-todastransacoes', pagarme.TodasTransações)
         router.post('/pagarme-estorno/:id', pagarme.EstornoPagamento)
-        router.get('/pagarme-recebiveis', pagarme.Recebiveis)
-        router.post('/pagarme-criarrecebedor', pagarme.CriandoRecebivel)
-        router.post('/pagarme-criarcontabancaria', pagarme.CriandoContaBancaria)
+        
+            router.get('/pagarme-recebiveis', pagarme.Recebiveis)
+            router.post('/pagarme-criarcontabancaria', pagarme.CriandoContaBancaria) // < Criar uma conta bancaria
+            router.post('/pagarme-criarrecebedor', pagarme.CriandoRecebivel) // CRIAR RECEBIVEIS, Eu escolho o dia do pagamento
         
         router.post('/frete',Frete.CalcularValorPrazo)
 
@@ -56,17 +58,12 @@ const multerConfig = require('./configs/uploads')
 
         // proximas rotas //
 
-        // router.post('/pedido',pedido) 
-        // router.get('/pedido',pedido) 
+        //router.post('/pedido',pedido) 
+        //router.get('/pedido',pedido) 
 
 
 
     //
-
-  
-    
-
-
 
 
 module.exports = router
