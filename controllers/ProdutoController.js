@@ -15,6 +15,7 @@ module.exports ={
             descrisao,
             preco,
             estoque,
+            peso,
         } = Request.body  
         
         const ResquestImages = Request.file
@@ -24,15 +25,18 @@ module.exports ={
             descrisao,
             preco,
             estoque,
+            peso,
             img: ResquestImages.filename
         }
-        
+        console.log(data);
+
         const schema = yup.object().shape({
 
             produto: yup.string().required(),
             descrisao: yup.string().required(),
             preco: yup.number().required(),
             estoque: yup.number().required(),
+            peso: yup.number().required(),
             img: yup.string().required(),
 
         })
@@ -73,6 +77,7 @@ module.exports ={
             descrisao,
             preco,
             estoque,
+            peso,
         } = Request.body  
         
         const ResquestImages = Request.file
@@ -82,6 +87,7 @@ module.exports ={
             descrisao,
             preco,
             estoque,
+            peso,
             img: ResquestImages.filename
         }
         
@@ -91,7 +97,8 @@ module.exports ={
             descrisao: yup.string().required(),
             preco: yup.number().required(),
             estoque: yup.number().required(),
-            img: yup.string().required()
+            peso: yup.number().required(),
+            img: yup.string().required(),
 
         })
 
