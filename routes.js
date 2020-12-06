@@ -15,6 +15,8 @@ const multerConfig = require('./configs/uploads')
     const Frete = require('./controllers/FreteController')
     
     const Carrinho = require('./controllers/CarrinhoController')
+   
+    
 //
 
     // configuração do multer
@@ -54,13 +56,15 @@ const multerConfig = require('./configs/uploads')
         router.get('/carrinho',Carrinho.ReadAll) 
         router.delete('/carrinho',Carrinho.Delete) // Rotas não funcional
 
+      
+
+
         // proximas rotas //
 
         // router.post('/pedido',pedido) 
         // router.get('/pedido',pedido) 
 
-
-
+      
     //
 
   
