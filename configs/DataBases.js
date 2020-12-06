@@ -1,7 +1,7 @@
 const knex = require('knex')({
   client: 'mysql2',
   connection: {
-      host : 'localhost',
+      host : 'http://c7e3c1b481d0.ngrok.io',
       user : 'root',
       password : '',
       database : 'test_ecommece'
