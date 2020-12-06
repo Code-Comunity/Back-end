@@ -1,7 +1,7 @@
 const yup = require('yup')
 
 module.exports = {
-
+ 
     Error1(req,res,next){
         const err = new Error("Pagina não encontrado")
             err.status = 404

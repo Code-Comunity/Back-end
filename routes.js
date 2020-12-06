@@ -4,6 +4,7 @@ const {Router} = require('express')
 const router = Router()
 const multerConfig = require('./configs/uploads')
 
+
 // Rotas 
     const Login = require('./controllers/LoginController')
 
@@ -15,8 +16,9 @@ const multerConfig = require('./configs/uploads')
     const Frete = require('./controllers/FreteController')
     
     const Carrinho = require('./controllers/CarrinhoController')
-   
-    
+
+    const PostBeck = require('./controllers/PostBackController')
+
 //
 
     // configuração do multer
@@ -46,25 +48,32 @@ const multerConfig = require('./configs/uploads')
         router.get('/pagarme-total',pagarme.Total) ///----rota não testada----///
         router.get('/pagarme-todastransacoes', pagarme.TodasTransações)
         router.post('/pagarme-estorno/:id', pagarme.EstornoPagamento)
-        router.get('/pagarme-recebiveis', pagarme.Recebiveis)
-        router.post('/pagarme-criarrecebedor', pagarme.CriandoRecebivel)
-        router.post('/pagarme-criarcontabancaria', pagarme.CriandoContaBancaria)
+        router.get('/pagarme-recebiveis', pagarme.Recebiveis) // 
+        router.post('/pagarme-criarrecebedor', pagarme.CriandoRecebivel) //
+        router.post('/pagarme-criarcontabancaria', pagarme.CriandoContaBancaria) //
         
+        
+
         router.post('/frete',Frete.CalcularValorPrazo)
 
         router.post('/carrinho',Carrinho.Create) 
         router.get('/carrinho',Carrinho.ReadAll) 
-        router.delete('/carrinho',Carrinho.Delete) // Rotas não funcional
+        // router.delete('/carrinho',Carrinho.Delete) // Rotas não funcional
+        router.delete('/carrinho',Carrinho.DeleteForId)
 
       
 
 
         // proximas rotas //
 
-        // router.post('/pedido',pedido) 
+        
         // router.get('/pedido',pedido) 
 
-      
+        router.post('/postback-pagarme-cartao',PostBeck.PostBeck)
+        router.post('/postback-pagarme-boleto',PostBeck.PostBeck)
+        
+        
+      //  router.get('/pag1',(req,res)=>{res.json({Message: "Pag1"})})
     //
 
   
