@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const {Render,RenderAll} = require('../views/Cliente-Views')
 
-
 module.exports ={
 
     async Create(Request = request,Response = response, next) {
@@ -41,7 +40,7 @@ module.exports ={
                 
                 dataforms.senha = bcrypt.hashSync(senha,10)
                     
-                const id_cliente = await DataBase.knex.insert(dataforms).into('clientes')
+                const id_cliente = await DataBases.knex.insert(dataforms).into('clientes')
                           
                 const id_carrinho = await DataBase.knex.insert({id_Cliente:id_cliente}).into('carrinhos')
     

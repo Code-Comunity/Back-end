@@ -1,11 +1,14 @@
 const knex = require('knex')({
   client: 'mysql2',
   connection: {
-      host : 'tcp://4.tcp.ngrok.io:18303',
-      user : 'root',
-      password : '',
-      database : 'test_ecommece'
-    }
+
+    host : 'localhost',
+    port: 3306,
+    user : 'better19_btuser',
+    password : 'Wtx9rDca4WAkszQ',
+    database : 'better19_batterbanco'
+      
+  }
 })
 
 module.exports = {
