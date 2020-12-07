@@ -3,7 +3,6 @@ const knex = require('knex')({
   connection: {
 
     host : 'localhost',
-    port: 3306,
     user : 'better19_btuser',
     password : 'Wtx9rDca4WAkszQ',
     database : 'better19_batterbanco'
