@@ -55,7 +55,8 @@ const multerConfig = require('./configs/uploads')
         router.post('/pagarme-criarcontabancaria', pagarme.CriandoContaBancaria) //
         
         router.post('/metas',Metas.Create)
-        router.delete('/metas:id',Metas.Delete)
+        router.delete('/metas/:id',Metas.Delete)
+        router.get('/metas', Metas.Index)
 
         router.post('/frete',Frete.CalcularValorPrazo)
 
