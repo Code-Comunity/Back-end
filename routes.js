@@ -18,6 +18,8 @@ const multerConfig = require('./configs/uploads')
     const Carrinho = require('./controllers/CarrinhoController')
 
     const PostBeck = require('./controllers/PostBackController')
+    
+    const Metas = require('./controllers/Metas')
 
 //
 
@@ -52,6 +54,7 @@ const multerConfig = require('./configs/uploads')
         router.post('/pagarme-criarrecebedor', pagarme.CriandoRecebivel) //
         router.post('/pagarme-criarcontabancaria', pagarme.CriandoContaBancaria) //
         
+        router.post('/metas',Metas.Create)
         
 
         router.post('/frete',Frete.CalcularValorPrazo)
