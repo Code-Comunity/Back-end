@@ -40,7 +40,7 @@ module.exports ={
                 
                 dataforms.senha = bcrypt.hashSync(senha,10)
                     
-                const id_cliente = await DataBases.knex.insert(dataforms).into('clientes')
+                const id_cliente = await DataBase.knex.insert(dataforms).into('clientes')
                           
                 const id_carrinho = await DataBase.knex.insert({id_Cliente:id_cliente}).into('carrinhos')
     
