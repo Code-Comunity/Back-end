@@ -7,7 +7,7 @@ module.exports = {
             cliente.push({
                 id: data.id_cliente,
                 cliente: data.nome,
-                imagem: `testenode-1.herokuapp.com/uploads/${data.img}`,
+                imagem: `https://testenode-1.herokuapp.com/uploads/${data.img}`,
                 email: data.email,
                 password: data.password
             })
@@ -22,7 +22,7 @@ module.exports = {
             clientes.push({
                 id: data.id_cliente,
                 cliente: data.nome,
-                imagem: `testenode-1.herokuapp.com/uploads/${data.img}`,
+                imagem: `https://testenode-1.herokuapp.com/uploads/${data.img}`,
                 email: data.email,
                 password: data.password
             })
