@@ -23,5 +23,14 @@ module.exports ={
      await DataBase.knex.insert(data).into('metas')
            
      return Response.status(201).json({message: 'Success'})
-  }
+  },
+  
+  async Delete(Request = request,Response = response){
+        
+        const {id} = Request.params
+
+        await DataBase.knex.table('metas').where({id: id}).delete()
+
+        return Response.status(200).json({message: 'Deletado com sucesso'})
+    }
 }
