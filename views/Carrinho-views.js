@@ -10,7 +10,7 @@ module.exports = {
                 descrisao: data.descrisao,
                 preco_unitario: data.preco,
                 quantidade: data.quantidade,
-                images: `http://localhost:8080/uploads/${data.img}`
+                images: `https://testenode-1.herokuapp.com/uploads/${dada.img}`
 
             })
         })
