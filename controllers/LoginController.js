@@ -39,7 +39,7 @@ module.exports = {
                 {   expiresIn: "1h"   })
 
                 Response.status(200).json({
-                    usuario:{nome,email,carrinho: carrinho.id,img:`http://localhost:8080/uploads/${img}`,endereco},
+                    usuario:{nome,email,carrinho: carrinho.id,img:`https://testenode-1.herokuapp.com/uploads/${img}`,endereco},
                     mensagem:"autenticado",
                     token: token
                 })  
