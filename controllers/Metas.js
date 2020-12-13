@@ -4,7 +4,7 @@ const yup = require('yup')
 const {Render,RenderAll} = require('../views/Produto-Views')
 
 module.exports ={
-  async Create(){
+  async Create(Request = request,Response = response){
     
          const {
             titulo,
