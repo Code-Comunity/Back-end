@@ -11,7 +11,7 @@ module.exports = {
                 descrisao: produto.descrisao,
                 preco: produto.preco,
                 estoque: produto.estoque,
-                images: `http://localhost:8080/uploads/${produto.img}`
+                images: `testenode-1.herokuapp.com/uploads/${produto.img}`
             })
         })            
         return produtos
@@ -27,7 +27,7 @@ module.exports = {
                 descrisao: produto.descrisao,
                 preco: produto.preco,
                 estoque: produto.estoque,
-                images: `http://localhost:8080/uploads/${produto.img}`
+                images: `testenode-1.herokuapp.com/uploads/${produto.img}`
             })
         })            
         return produtos
