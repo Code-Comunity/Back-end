@@ -32,5 +32,10 @@ module.exports ={
         await DataBase.knex.table('metas').where({id: id}).delete()
 
         return Response.status(200).json({message: 'Deletado com sucesso'})
-    }
+    },
+    async Index(Request = request,Response = response){
+    const metas = await DataBase.knex.select().table('metas')
+        
+        Response.status(200).json({metas})
+  }
 }
