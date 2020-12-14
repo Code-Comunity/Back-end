@@ -109,7 +109,7 @@ module.exports ={
     },
     async Update_Password(Request = request,Response = response){
         
-        const {id} = Request.params
+        const {id} = Request.body
 
         var {senha} = Request.body
 
