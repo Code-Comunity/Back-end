@@ -61,7 +61,7 @@ const {RenderAll} = require('../views/Carrinho-views')
         const {id_carrinho , id_produto} = Request
         const result = await knex('carrinho_produto').select('id_produto as id').where({id_carrinho:id_carrinho, id_produto:id_produto}).first()
         return result
-        
+         
     }
 
     async function Update(Request){
